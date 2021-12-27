@@ -1,0 +1,33 @@
+1. Naive Implementation of DFT
+>> python -m timeit 'forward_transform()'
+20000000 loops, best of 5: 11.1 nsec per loop
+
+i. When square matrix is 10x10 then time taken to compute: 0.022047758102416992 in seconds since the epoch
+
+ii. When square matrix is 15x15 then time taken to compute: 0.13796734809875488 in seconds since the epoch
+
+iii. When square matrix is 20x20 then time taken to compute: 0.3853914737701416 in seconds since the epoch
+
+
+2. Leveraging the symmetry property of DFT to compute a faster version of the DFT implementation
+>> python -m timeit 'symmetricDFT()'
+20000000 loops, best of 5: 11 nsec per loop
+
+i. When square matrix is 10x10 then time taken to compute: 0.031122922897338867 in seconds since the epoch
+
+ii. When square matrix is 15x15 then time taken to compute: 0.11743450164794922 in seconds since the epoch
+
+iii. When square matrix is 20x20 then time taken to compute: 0.5013608932495117 in seconds since the epoch
+
+
+3. Cooley-Tukey FFT algorithm for a fast Fourier transform of a matrix
+>> python -m timeit 'FFT()'
+20000000 loops, best of 5: 9.95 nsec per loop
+
+Cooley and Tukey showed that it's possible to divide the DFT computation into two smaller parts, computed a single one dimension array from two dimension matrix with same number of frequency samples as in two dimension, then split it into two terms, one on the odd-numbered indices, and one on the even-numbered indices. Hence for computation, we compared on the number of frequency values in the power of 2. So, instead of 10x10=100, we did 16x16=256, instead of 15x15=225, we did 32x32=1024
+
+i. For samples 8x8=64, Time taken to compute: 613300 in nanoseconds since the epoch
+
+ii. For samples 16x16=256, Time taken to compute: 1486500 in nanoseconds since the epoch
+
+iii. For samples 32x32=1024, Time taken to compute: 4936100 in nanoseconds since the epoch
